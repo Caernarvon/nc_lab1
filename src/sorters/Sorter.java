@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 public class Sorter {
 
+    private Sorter () {}
+
     public static void bubbleSortFromTheBeginning(int[] array) {
         doBubbleSortFromTheBeginning(array);
     }
@@ -148,24 +150,7 @@ public class Sorter {
         doQuickSortWithBubbleFromTheEnd(array, current + 1, ARRAY_END);
     }
 
-    public static void printArray(int[] array) {
-        System.out.println();
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i] + " ");
-        }
-        System.out.println();
-    }
-
     public static void ArraySort(int[] array) {
         Arrays.sort(array);
-    }
-
-    public static void main(String[] args) {
-        int[] array = Filler.generateRandomlyFilledArray(10);
-        printArray(array);
-        quickSortWithBubbleFromTheEnd(array);
-        printArray(array);
-        quickSort(array);
-        printArray(array);
     }
 }

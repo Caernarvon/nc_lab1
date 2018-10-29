@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class Filler {
 
+    private Filler () {}
+
     // Generates and returns a sorted array
     public static int[] generateSortedArray(final int ARRAY_LENGTH) {
         int[] array = new int[ARRAY_LENGTH];
