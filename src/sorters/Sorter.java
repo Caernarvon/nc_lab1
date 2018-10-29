@@ -1,12 +1,12 @@
 package sorters;
 
-import fillers.Filler;
-
 import java.util.Arrays;
 
 public class Sorter {
 
     private Sorter () {}
+
+    //Bubble sort from the beginning
 
     public static void bubbleSortFromTheBeginning(int[] array) {
         doBubbleSortFromTheBeginning(array);
@@ -28,6 +28,8 @@ public class Sorter {
         doBubbleSortFromTheEnd(array);
     }
 
+    //Bubble sort from the end
+
     private static void doBubbleSortFromTheEnd(int[] array) {
         for (int i = array.length - 1; i >= 0; i--) {
             for (int j = array.length - 1; j > i; j--) {
@@ -40,6 +42,8 @@ public class Sorter {
         }
     }
 
+    //Quick sort
+
     public static void quickSort(int[] array) {
         doQuickSort(array, 0, array.length - 1);
     }
@@ -48,11 +52,9 @@ public class Sorter {
         if (array.length == 0) {
             return;
         }
-
         if (ARRAY_START >= ARRAY_END) {
             return;
         }
-
         int middle = ARRAY_START + (ARRAY_END - ARRAY_START) / 2;
         int current = array[middle];
         int i = ARRAY_START, j = ARRAY_END;
@@ -64,7 +66,6 @@ public class Sorter {
             while (array[j] > current) {
                 j--;
             }
-
             if (i <= j) {
                 int temp = array[i];
                 array[i] = array[j];
@@ -73,20 +74,20 @@ public class Sorter {
                 j--;
             }
         }
+        if (ARRAY_START < j) {
+            doQuickSort(array, ARRAY_START, j);}
 
-        // вызов рекурсии для сортировки левой и правой части
-        if (ARRAY_START < j)
-            doQuickSort(array, ARRAY_START, j);
-
-        if (ARRAY_END > i)
-            doQuickSort(array, i, ARRAY_END);
+        if (ARRAY_END > i) {
+            doQuickSort(array, i, ARRAY_END);}
     }
 
-    public static void quickSortWithBubbleFromTheBeginning(int[] array) {
-        doQuickSortWithBubbleFromTheBeginning(array, 0, array.length - 1);
+    // Merged sort with Bubble sort from the beginning
+
+    public static void mergedSortWithBubbleFromTheBeginning(int[] array) {
+        doMergedSortWithBubbleFromTheBeginning(array, 0, array.length - 1);
     }
 
-    private static void doQuickSortWithBubbleFromTheBeginning(int[] array, final int ARRAY_START, final int ARRAY_END) {
+    private static void doMergedSortWithBubbleFromTheBeginning(int[] array, final int ARRAY_START, final int ARRAY_END) {
         if (ARRAY_START >= ARRAY_END) {
             return;
         }
@@ -112,15 +113,17 @@ public class Sorter {
                 }
             }
         }
-        doQuickSortWithBubbleFromTheBeginning(array, ARRAY_START, current);
-        doQuickSortWithBubbleFromTheBeginning(array, current + 1, ARRAY_END);
+        doMergedSortWithBubbleFromTheBeginning(array, ARRAY_START, current);
+        doMergedSortWithBubbleFromTheBeginning(array, current + 1, ARRAY_END);
     }
 
-    public static void quickSortWithBubbleFromTheEnd(int[] array) {
-        doQuickSortWithBubbleFromTheEnd(array, 0, array.length - 1);
+    // Merged sort with Bubble sort from the end
+
+    public static void mergedSortWithBubbleFromTheEnd(int[] array) {
+        doMergedSortWithBubbleFromTheEnd(array, 0, array.length - 1);
     }
 
-    private static void doQuickSortWithBubbleFromTheEnd(int[] array, final int ARRAY_START, final int ARRAY_END) {
+    private static void doMergedSortWithBubbleFromTheEnd(int[] array, final int ARRAY_START, final int ARRAY_END) {
         if (ARRAY_START >= ARRAY_END) {
             return;
         }
@@ -146,9 +149,11 @@ public class Sorter {
                 }
             }
         }
-        doQuickSortWithBubbleFromTheEnd(array, ARRAY_START, current);
-        doQuickSortWithBubbleFromTheEnd(array, current + 1, ARRAY_END);
+        doMergedSortWithBubbleFromTheEnd(array, ARRAY_START, current);
+        doMergedSortWithBubbleFromTheEnd(array, current + 1, ARRAY_END);
     }
+
+    // Array sort from Arrays lib
 
     public static void ArraySort(int[] array) {
         Arrays.sort(array);
