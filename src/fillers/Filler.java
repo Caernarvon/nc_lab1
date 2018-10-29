@@ -18,11 +18,9 @@ public class Filler {
 
     // Generates and returns a sorted array with X int on the final element
     public static int[] generateSortedArrayWithX(final int ARRAY_LENGTH, final int X) {
-        int[] array = new int[ARRAY_LENGTH];
-        int[] generatedArray = generateSortedArray(ARRAY_LENGTH - 1);
-        for (int i = 0; i < ARRAY_LENGTH - 1; i++) {
-            array[i] = generatedArray[i];
-        }
+        int[] array;
+        int[] generatedArray = generateSortedArray(ARRAY_LENGTH);
+        array = Arrays.copyOf(generatedArray, ARRAY_LENGTH + 1);
         array[ARRAY_LENGTH - 1] = X;
         return array;
     }
