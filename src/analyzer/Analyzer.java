@@ -37,6 +37,28 @@ public class Analyzer {
         return getArraySortTime(array);
     }
 
+    public static long mergedWithBubbleSortFromTheBeginningToSortedArray (){
+        int[] array = sortedArray.clone();
+        return getMergedWithBubbleSortFromTheBeginningTime(array);
+    }
+
+    public static long mergedWithBubbleSortFromTheEndToSortedArray (){
+        int[] array = sortedArray.clone();
+        return getMergedWithBubbleSortFromTheEndTime(array);
+    }
+
+    public static long mergedWithQuickSortToSortedArray (){
+        int[] array = sortedArray.clone();
+        return getMergedWithQuickSortTime(array);
+    }
+
+    public static long mergedWithArraySortToSortedArray (){
+        int[] array = sortedArray.clone();
+        return getMergedWithArraySortTime(array);
+    }
+
+
+
     // Calculating time that required to sort already sorted array with X
 
     public static long bubbleSortFromTheBeginningToSortedArrayWithX (){
@@ -57,6 +79,26 @@ public class Analyzer {
     public static long arraySortToSortedArrayWithX (){
         int[] array = sortedArrayWithX.clone();
         return getArraySortTime(array);
+    }
+
+    public static long mergedWithBubbleSortFromTheBeginningToSortedArrayWithX (){
+        int[] array = sortedArrayWithX.clone();
+        return getMergedWithBubbleSortFromTheBeginningTime(array);
+    }
+
+    public static long mergedWithBubbleSortFromTheEndToSortedArrayWithX (){
+        int[] array = sortedArrayWithX.clone();
+        return getMergedWithBubbleSortFromTheEndTime(array);
+    }
+
+    public static long mergedWithQuickSortToSortedArrayWithX (){
+        int[] array = sortedArrayWithX.clone();
+        return getMergedWithQuickSortTime(array);
+    }
+
+    public static long mergedWithArraySortToSortedArrayWithX (){
+        int[] array = sortedArrayWithX.clone();
+        return getMergedWithArraySortTime(array);
     }
 
     // Calculating time that required to sort already sorted and then reverted array
@@ -81,6 +123,26 @@ public class Analyzer {
         return getArraySortTime(array);
     }
 
+    public static long mergedWithBubbleSortFromTheBeginningToSortedRevertedArray (){
+        int[] array = sortedRevertedArray.clone();
+        return getMergedWithBubbleSortFromTheBeginningTime(array);
+    }
+
+    public static long mergedWithBubbleSortFromTheEndToSortedRevertedArray (){
+        int[] array = sortedRevertedArray.clone();
+        return getMergedWithBubbleSortFromTheEndTime(array);
+    }
+
+    public static long mergedWithQuickSortToSortedRevertedArray (){
+        int[] array = sortedRevertedArray.clone();
+        return getMergedWithQuickSortTime(array);
+    }
+
+    public static long mergedWithArraySortToSortedRevertedArray (){
+        int[] array = sortedRevertedArray.clone();
+        return getMergedWithArraySortTime(array);
+    }
+
     // Calculating time that required to sort randomly filled array
 
     public static long bubbleSortFromTheBeginningToRandomlyFilledArray (){
@@ -101,6 +163,26 @@ public class Analyzer {
     public static long arraySortToRandomlyFilledArray (){
         int[] array = randomlyFilledArray.clone();
         return getArraySortTime(array);
+    }
+
+    public static long mergedWithBubbleSortFromTheBeginningToRandomlyFilledArray (){
+        int[] array = randomlyFilledArray.clone();
+        return getMergedWithBubbleSortFromTheBeginningTime(array);
+    }
+
+    public static long mergedWithBubbleSortFromTheEndToRandomlyFilledArray (){
+        int[] array = randomlyFilledArray.clone();
+        return getMergedWithBubbleSortFromTheEndTime(array);
+    }
+
+    public static long mergedWithQuickSortToRandomlyFilledArray (){
+        int[] array = randomlyFilledArray.clone();
+        return getMergedWithQuickSortTime(array);
+    }
+
+    public static long mergedWithArraySortToRandomlyFilledArray (){
+        int[] array = randomlyFilledArray.clone();
+        return getMergedWithArraySortTime(array);
     }
 
     // Calculating time methods for different sorts
@@ -128,7 +210,35 @@ public class Analyzer {
 
     private static long getArraySortTime (int[] array) {
         start = System.nanoTime();
-        Sorter.ArraySort(array);
+        Sorter.arraySort(array);
+        end = System.nanoTime();
+        return end - start;
+    }
+
+    private static long getMergedWithBubbleSortFromTheBeginningTime (int[] array) {
+        start = System.nanoTime();
+        Sorter.mergedSortWithBubbleFromTheBeginning(array);
+        end = System.nanoTime();
+        return end - start;
+    }
+
+    private static long getMergedWithBubbleSortFromTheEndTime (int[] array) {
+        start = System.nanoTime();
+        Sorter.mergedSortWithBubbleFromTheEnd(array);
+        end = System.nanoTime();
+        return end - start;
+    }
+
+    private static long getMergedWithQuickSortTime (int[] array) {
+        start = System.nanoTime();
+        Sorter.mergedSortWithQuickSort(array);
+        end = System.nanoTime();
+        return end - start;
+    }
+
+    private static long getMergedWithArraySortTime (int[] array) {
+        start = System.nanoTime();
+        Sorter.mergedSortWithArraySort(array);
         end = System.nanoTime();
         return end - start;
     }

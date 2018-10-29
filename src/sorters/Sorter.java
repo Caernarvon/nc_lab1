@@ -1,5 +1,7 @@
 package sorters;
 
+import fillers.Filler;
+
 import java.util.Arrays;
 
 public class Sorter {
@@ -83,79 +85,102 @@ public class Sorter {
 
     // Merged sort with Bubble sort from the beginning
 
-    public static void mergedSortWithBubbleFromTheBeginning(int[] array) {
-        doMergedSortWithBubbleFromTheBeginning(array, 0, array.length - 1);
+    public static int[] mergedSortWithBubbleFromTheBeginning(int[] array) {
+        if(array.length < 2) {
+            return array;}
+        int middle = array.length / 2;
+        int[] array1 = Arrays.copyOfRange(array, 0, middle);
+        int[] array2 = Arrays.copyOfRange(array, middle, array.length);
+        return doMergedSortWithBubbleFromTheBeginning(mergedSortWithBubbleFromTheBeginning(array1),
+                mergedSortWithBubbleFromTheBeginning(array2));
     }
 
-    private static void doMergedSortWithBubbleFromTheBeginning(int[] array, final int ARRAY_START, final int ARRAY_END) {
-        if (ARRAY_START >= ARRAY_END) {
-            return;
-        }
-
-        int i = ARRAY_START;
-        int j = ARRAY_END;
-        int current = i - (i - j) / 2;
-        while (i < j) {
-            while (i < current && (array[i] <= array[current])) {
-                i++;
-            }
-            while (j > current && (array[current] <= array[j])) {
-                j--;
-            }
-            if (i < j) {
-                int temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-                if (i == current) {
-                    current = j;
-                } else if (j == current) {
-                    current = i;
-                }
-            }
-        }
-        doMergedSortWithBubbleFromTheBeginning(array, ARRAY_START, current);
-        doMergedSortWithBubbleFromTheBeginning(array, current + 1, ARRAY_END);
+    private static int[] doMergedSortWithBubbleFromTheBeginning(int[] array1, int array2[]){
+        bubbleSortFromTheBeginning(array1);
+        bubbleSortFromTheBeginning(array2);
+        return mergeArrays(array1, array2);
     }
 
     // Merged sort with Bubble sort from the end
 
-    public static void mergedSortWithBubbleFromTheEnd(int[] array) {
-        doMergedSortWithBubbleFromTheEnd(array, 0, array.length - 1);
+    public static int[] mergedSortWithBubbleFromTheEnd(int[] array) {
+        if(array.length < 2) {
+            return array;}
+        int middle = array.length / 2;
+        int[] array1 = Arrays.copyOfRange(array, 0, middle);
+        int[] array2 = Arrays.copyOfRange(array, middle, array.length);
+        return doMergedSortWithBubbleFromTheEnd(mergedSortWithBubbleFromTheEnd(array1),
+                mergedSortWithBubbleFromTheEnd(array2));
     }
 
-    private static void doMergedSortWithBubbleFromTheEnd(int[] array, final int ARRAY_START, final int ARRAY_END) {
-        if (ARRAY_START >= ARRAY_END) {
-            return;
-        }
+    private static int[] doMergedSortWithBubbleFromTheEnd(int[] array1, int array2[]){
+        bubbleSortFromTheEnd(array1);
+        bubbleSortFromTheEnd(array2);
+        return mergeArrays(array1, array2);
+    }
 
-        int i = ARRAY_START;
-        int j = ARRAY_END;
-        int current = i - (i - j) / 2;
-        while (i < j) {
-            while (i < current && (array[i] <= array[current])) {
-                i++;
-            }
-            while (j > current && (array[current] <= array[j])) {
-                j--;
-            }
-            if (j > i) {
-                int temp = array[j];
-                array[j] = array[i];
-                array[i] = temp;
-                if (i == current) {
-                    current = j;
-                } else if (j == current) {
-                    current = i;
-                }
-            }
-        }
-        doMergedSortWithBubbleFromTheEnd(array, ARRAY_START, current);
-        doMergedSortWithBubbleFromTheEnd(array, current + 1, ARRAY_END);
+    // Merged sort with quick sort
+
+    public static int[] mergedSortWithQuickSort(int[] array) {
+        if(array.length < 2) {
+            return array;}
+        int middle = array.length / 2;
+        int[] array1 = Arrays.copyOfRange(array, 0, middle);
+        int[] array2 = Arrays.copyOfRange(array, middle, array.length);
+        return doMergedSortWithQuickSort(mergedSortWithQuickSort(array1),
+                mergedSortWithQuickSort(array2));
+    }
+
+    private static int[] doMergedSortWithQuickSort(int[] array1, int array2[]){
+        quickSort(array1);
+        quickSort(array2);
+        return mergeArrays(array1, array2);
+    }
+
+    // Merged sort with quick sort
+
+    public static int[] mergedSortWithArraySort(int[] array) {
+        if(array.length < 2) {
+            return array;}
+        int middle = array.length / 2;
+        int[] array1 = Arrays.copyOfRange(array, 0, middle);
+        int[] array2 = Arrays.copyOfRange(array, middle, array.length);
+        return doMergedSortWithArraySort(mergedSortWithArraySort(array1),
+                mergedSortWithArraySort(array2));
+    }
+
+    private static int[] doMergedSortWithArraySort(int[] array1, int array2[]){
+        arraySort(array1);
+        arraySort(array2);
+        return mergeArrays(array1, array2);
     }
 
     // Array sort from Arrays lib
 
-    public static void ArraySort(int[] array) {
+    public static void arraySort(int[] array) {
         Arrays.sort(array);
+    }
+
+    //Method that merges two arrays in one sorted array
+
+    private static int[] mergeArrays(int[] array1, int[]array2) {
+        int newArrayLength = array1.length + array2.length;
+        int[] array = new int[newArrayLength];
+        int k = 0;
+        int j = 0;
+        for (int i = 0; i < newArrayLength; i++) {
+            if (k == array1.length) {
+                array[i] = array2[j++];
+            } else if (j == array2.length) {
+                array[i] = array1[k++];
+            } else {
+                if (array1[k] < array2[j]) {
+                    array[i] = array1[k++];
+                } else {
+                    array[i] = array2[j++];
+                }
+            }
+        }
+        return array;
     }
 }
