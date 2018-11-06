@@ -10,7 +10,7 @@ public class Sorter {
 
     //Bubble sort from the beginning
 
-    private static void bubbleSortFromTheBeginning(int[] array) {
+    public static void bubbleSortFromTheBeginning(int[] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length - i - 1; j++) {
                 if (array[j] > array[j + 1]) {
@@ -24,7 +24,7 @@ public class Sorter {
 
     //Bubble sort from the end
 
-    private static void bubbleSortFromTheEnd(int[] array) {
+    public static void bubbleSortFromTheEnd(int[] array) {
         for (int i = array.length - 1; i >= 0; i--) {
             for (int j = array.length - 1; j > i; j--) {
                 if (array[j] < array[j - 1]) {
