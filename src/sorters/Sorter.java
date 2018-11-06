@@ -10,11 +10,7 @@ public class Sorter {
 
     //Bubble sort from the beginning
 
-    public static void bubbleSortFromTheBeginning(int[] array) {
-        doBubbleSortFromTheBeginning(array);
-    }
-
-    private static void doBubbleSortFromTheBeginning(int[] array) {
+    private static void bubbleSortFromTheBeginning(int[] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length - i - 1; j++) {
                 if (array[j] > array[j + 1]) {
@@ -26,13 +22,9 @@ public class Sorter {
         }
     }
 
-    public static void bubbleSortFromTheEnd(int[] array) {
-        doBubbleSortFromTheEnd(array);
-    }
-
     //Bubble sort from the end
 
-    private static void doBubbleSortFromTheEnd(int[] array) {
+    private static void bubbleSortFromTheEnd(int[] array) {
         for (int i = array.length - 1; i >= 0; i--) {
             for (int j = array.length - 1; j > i; j--) {
                 if (array[j] < array[j - 1]) {
@@ -91,6 +83,7 @@ public class Sorter {
         int middle = array.length / 2;
         int[] array1 = Arrays.copyOfRange(array, 0, middle);
         int[] array2 = Arrays.copyOfRange(array, middle, array.length);
+
         return doMergedSortWithBubbleFromTheBeginning(mergedSortWithBubbleFromTheBeginning(array1),
                 mergedSortWithBubbleFromTheBeginning(array2));
     }
