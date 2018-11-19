@@ -110,10 +110,6 @@ public class Sorter {
         return mergeArrays(array1, array2);
     }
 
-
-
-
-
     // Merged sort with quick sort
 
     public static int[] mergedSortWithQuickSort(int[] array) {
