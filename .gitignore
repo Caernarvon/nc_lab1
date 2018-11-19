@@ -11,7 +11,7 @@
 .mtj.tmp/
 
 #Idea settings
-.idea/
+.idea
 out/*
 
 
