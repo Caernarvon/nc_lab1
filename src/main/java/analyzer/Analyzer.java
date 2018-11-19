@@ -8,7 +8,7 @@ public class Analyzer {
     private static long start;
     private static long end;
     private static final int ARRAY_LENGTH = 1000;
-    private static final int X = (int) (Math.random() * (2147483647 / 2));
+    private static final int X = (int) (Math.random() * ARRAY_LENGTH);
     private static int[] sortedArray = Filler.generateSortedArray(ARRAY_LENGTH);
     private static int[] sortedArrayWithX = Filler.generateSortedArrayWithX(ARRAY_LENGTH, X);
     private static int[] sortedRevertedArray = Filler.generateSortedRevertedArray(ARRAY_LENGTH);

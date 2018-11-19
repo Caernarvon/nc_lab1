@@ -10,9 +10,13 @@ public class Filler {
     public static int[] generateSortedArray(final int ARRAY_LENGTH) {
         int[] array = new int[ARRAY_LENGTH];
         for (int i = 0; i < ARRAY_LENGTH; i++) {
-            array[i] = generateRandomNumber();
+            if(i == 0) {
+                array[i] = i;
+            }
+            else {
+                array[i] = array[i - 1] + generateRandomNumber();
+            }
         }
-        Arrays.sort(array);
         return array;
     }
 
@@ -46,6 +50,8 @@ public class Filler {
     }
 
     private static int generateRandomNumber() {
-        return (int) (Math.random() * 2147483647);
+        return (int) (Math.random() * 100000);
     }
+
+
 }
