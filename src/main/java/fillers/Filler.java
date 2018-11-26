@@ -3,6 +3,8 @@ package fillers;
 import java.util.Arrays;
 
 /**
+ * Class that fills arrays.
+ *
  * @author Vovk
  */
 
@@ -14,7 +16,9 @@ public class Filler {
      */
     private Filler () {}
 
-    // Generates and returns a sorted array
+    /**
+     * Generates and returns a sorted array.
+     */
     @FillMethod
     public static int[] generateSortedArray(final int ARRAY_LENGTH) {
         int[] array = new int[ARRAY_LENGTH];
@@ -25,7 +29,9 @@ public class Filler {
         return array;
     }
 
-    // Generates and returns a sorted array with X int on the final element
+    /**
+     * Generates and returns a sorted array with X int on the final element.
+     */
     @FillMethod
     public static int[] generateSortedArrayWithX(final int ARRAY_LENGTH) {
         final int X = generateRandomNumber() * 2;
@@ -36,7 +42,9 @@ public class Filler {
         return array;
     }
 
-    // Generates and returns a sorted and then reverted array
+    /**
+     * Generates and returns a sorted and then reverted array.
+     */
     @FillMethod
     public static int[] generateSortedRevertedArray(final int ARRAY_LENGTH) {
         int[] array = generateSortedArray(ARRAY_LENGTH);
@@ -48,7 +56,9 @@ public class Filler {
         return array;
     }
 
-    // Generates and returns a randomly filled array
+    /**
+     * Generates and returns a randomly filled array.
+     */
     @FillMethod
     public static int[] generateRandomlyFilledArray(final int ARRAY_LENGTH) {
         int[] array = new int[ARRAY_LENGTH];
@@ -58,6 +68,9 @@ public class Filler {
         return array;
     }
 
+    /**
+     * Generates and returns a random number.
+     */
     private static int generateRandomNumber() {
         return (int) (Math.random() * 1000);
     }
