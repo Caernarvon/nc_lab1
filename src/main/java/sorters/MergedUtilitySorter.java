@@ -6,6 +6,7 @@ package sorters;
  * @author Vovk
  */
 
+@SorterName(name = "MergedUtilitySorter")
 public final class MergedUtilitySorter extends AbstractMergedSorter {
 
     /**

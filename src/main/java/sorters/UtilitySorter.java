@@ -8,6 +8,7 @@ import java.util.Arrays;
  * @author Vovk
  */
 
+@SorterName(name = "UtilitySorter")
 public final class UtilitySorter extends AbstractSorter {
 
     /**

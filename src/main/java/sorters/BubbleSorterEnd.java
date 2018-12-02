@@ -6,6 +6,7 @@ package sorters;
  * @author Vovk
  */
 
+@SorterName(name = "BubbleSorterEnd")
 public final class BubbleSorterEnd extends AbstractBubbleSorter {
 
     /**
