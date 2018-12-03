@@ -19,7 +19,7 @@ public class Filler {
     /**
      * Generates and returns a sorted array.
      */
-    @FillMethod
+    @FillMethod(name = "SortedArray")
     public static int[] generateSortedArray(final int ARRAY_LENGTH) {
         int[] array = new int[ARRAY_LENGTH];
         array[0] = 1;
@@ -32,7 +32,7 @@ public class Filler {
     /**
      * Generates and returns a sorted array with X int on the final element.
      */
-    @FillMethod
+    @FillMethod(name = "SortedArrayWithX")
     public static int[] generateSortedArrayWithX(final int ARRAY_LENGTH) {
         final int X = generateRandomNumber() * 2;
         int[] array;
@@ -45,7 +45,7 @@ public class Filler {
     /**
      * Generates and returns a sorted and then reverted array.
      */
-    @FillMethod
+    @FillMethod(name = "SortedRevertedArray")
     public static int[] generateSortedRevertedArray(final int ARRAY_LENGTH) {
         int[] array = generateSortedArray(ARRAY_LENGTH);
         for (int i = 0; i < ARRAY_LENGTH / 2; i++) {
@@ -59,7 +59,7 @@ public class Filler {
     /**
      * Generates and returns a randomly filled array.
      */
-    @FillMethod
+    @FillMethod(name = "RandomlyFillerArray")
     public static int[] generateRandomlyFilledArray(final int ARRAY_LENGTH) {
         int[] array = new int[ARRAY_LENGTH];
         for (int i = 0; i < ARRAY_LENGTH; i++) {
