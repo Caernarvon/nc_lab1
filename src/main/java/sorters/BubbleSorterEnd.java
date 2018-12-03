@@ -29,5 +29,10 @@ public final class BubbleSorterEnd extends AbstractBubbleSorter {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "BubbleSorterEnd";
+    }
 }
 

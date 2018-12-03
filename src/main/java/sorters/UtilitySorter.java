@@ -21,4 +21,9 @@ public final class UtilitySorter extends AbstractSorter {
     public void sort(int[] array) {
         Arrays.sort(array);
     }
+
+    @Override
+    public String toString() {
+        return "UtilitySorter";
+    }
 }

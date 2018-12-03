@@ -30,4 +30,9 @@ public final class BubbleSorterBgn extends AbstractBubbleSorter {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return "BubbleSorterBgn";
+    }
 }

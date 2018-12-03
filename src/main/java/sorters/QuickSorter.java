@@ -65,4 +65,9 @@ public final class QuickSorter extends AbstractSorter {
             quickSort(array, i, ARRAY_END);
         }
     }
+
+    @Override
+    public String toString() {
+        return "QuickSorter";
+    }
 }

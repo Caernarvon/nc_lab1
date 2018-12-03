@@ -23,4 +23,9 @@ public final class MergedBubbleSorterEnd extends AbstractMergedSorter {
         sorter.sort(array2);
         return mergeArrays(array1, array2);
     }
+
+    @Override
+    public String toString() {
+        return "MergedBubbleSorterEnd";
+    }
 }
