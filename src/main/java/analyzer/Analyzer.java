@@ -1,8 +1,6 @@
 package analyzer;
 
 import fillers.FillMethod;
-import fillers.Filler;
-import org.reflections.ReflectionUtils;
 import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;
@@ -43,7 +41,7 @@ public class Analyzer {
      * The{@code int} value is used to define array length in all
      * fillers.
      */
-    private final int ARRAY_LENGTH = 1000;
+    private final int ARRAY_SIZE = 1000;
 
     /**
      * Generating all arrays through reflection. Later these arrays will be
@@ -51,16 +49,12 @@ public class Analyzer {
      * on it. Copying lets to get replica of originally created array to get
      * best results of checking time.
      */
-    private int[] sortedArray = fillThroughReflection("generateSortedArray(int)");
-    private int[] sortedArrayWithX = fillThroughReflection("generateSortedArrayWithX(int)");
-    private int[] sortedRevertedArray = fillThroughReflection("generateSortedRevertedArray(int)");
-    private int[] randomlyFilledArray = fillThroughReflection("generateRandomlyFilledArray(int)");
 
-    /**
-     * Sets of annotated methods and subtypes.
-     */
-    private Set<Class<? extends AbstractSorter>> subTypes;
-    private Set<java.lang.reflect.Method> annotatedMethods = findAnnotatedMethods();
+    private analyzer.ReflectionUtils reflectionUtils = new analyzer.ReflectionUtils();
+    private int[] sortedArray = reflectionUtils.fillThroughReflection("generateSortedArray(int)", ARRAY_SIZE);
+    private int[] sortedArrayWithX = reflectionUtils.fillThroughReflection("generateSortedArrayWithX(int)", ARRAY_SIZE);
+    private int[] sortedRevertedArray = reflectionUtils.fillThroughReflection("generateSortedRevertedArray(int)", ARRAY_SIZE);
+    private int[] randomlyFilledArray = reflectionUtils.fillThroughReflection("generateRandomlyFilledArray(int)", ARRAY_SIZE);
 
     /**
      * Methods below allows to calculate time that required to sort an already
@@ -290,13 +284,12 @@ public class Analyzer {
      * <p>Method takes any of {@code AbstractSorter} subtypes, that's gives a some flexibility
      * while using this method.
      *
-     * @param array array to work with.
+     * @param array          array to work with.
      * @param abstractSorter subtype of AbstractSorter.
-     * @param className class name to find class.
+     * @param className      class name to find class.
      */
     private long getSortTime(int[] array, AbstractSorter abstractSorter, String className) {
-        findSubclasses();
-        for (Class<? extends AbstractSorter> subType : subTypes) {
+        for (Class<? extends AbstractSorter> subType : reflectionUtils.findSubclasses()) {
             if (subType.toString().contains(className)) {
                 try {
                     Method method = subType.getMethod("sort", int[].class);
@@ -318,46 +311,14 @@ public class Analyzer {
     }
 
     /**
-     * Method returns set of {@code AbstractSorter} subtypes placed in
-     * sorters package.
-     */
-    private Set<Class<? extends AbstractSorter>> findSubclasses() {
-        Reflections reflections = new Reflections("sorters", ReflectionUtils.class.getClassLoader(), new SubTypesScanner(false));
-        subTypes = reflections.getSubTypesOf(AbstractSorter.class);
-        return subTypes;
-    }
-
-    /**
-     * Method returns set of marked methods with {@code FillMethod}.
-     * <p> Method is using reflection api to get set of marked methods.
-     */
-    private Set<Method> findAnnotatedMethods() {
-        Reflections reflections = new Reflections("fillers", MethodAnnotationsScanner.class);
-        annotatedMethods = reflections.getMethodsAnnotatedWith(FillMethod.class);
-        return annotatedMethods;
-    }
-
-    /**
      * Method allows to fill array using set of marked methods with {@code FillMethod}.
      * <p> In reference to Reflections API{@see reflections.Reflections} if method is
      * static than first arg should be null.
      *
      * @param methodName method name which will be used to fill.
      */
-    private int[] fillThroughReflection(String methodName) {
-        int[] array = new int[ARRAY_LENGTH];
-        findAnnotatedMethods();
-        for (Method anAnnotatedMethod : annotatedMethods) {
-            if (anAnnotatedMethod.toString().contains(methodName)) {
-                try {
-                    array = (int[]) anAnnotatedMethod.invoke(null, array.length);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return array;
+    private int[] fillThroughReflection(String methodName, final int ARRAY_SIZE) {
+        ReflectionUtils reflectionUtils = new ReflectionUtils();
+        return reflectionUtils.fillThroughReflection(methodName, ARRAY_SIZE);
     }
 }
