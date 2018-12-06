@@ -16,7 +16,7 @@ public final class UtilitySorter extends AbstractSorter {
      *
      * <p>Method calls {@code Arrays.sort} to do sort.
      *
-     * @param array array to sort
+     * @param array array to sort.
      */
     public void sort(int[] array) {
         Arrays.sort(array);

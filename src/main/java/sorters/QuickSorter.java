@@ -14,7 +14,7 @@ public final class QuickSorter extends AbstractSorter {
      *
      * <p>Method calls {@code quickSort} to do sort.
      *
-     * @param array array to sort
+     * @param array array to sort.
      */
     @Override
     public void sort(int[] array) {
@@ -27,9 +27,9 @@ public final class QuickSorter extends AbstractSorter {
      *
      * <p>Method calls {@code quickSort} to do sort.
      *
-     * @param array array to sort
-     * @param ARRAY_START start point of array
-     * @param ARRAY_END end point of array
+     * @param array array to sort.
+     * @param ARRAY_START start point of array.
+     * @param ARRAY_END end point of array.
      */
     private void quickSort(int[] array, final int ARRAY_START, final int ARRAY_END) {
         if (array.length == 0) {

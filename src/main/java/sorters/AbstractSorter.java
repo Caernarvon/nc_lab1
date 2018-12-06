@@ -11,7 +11,7 @@ public abstract class AbstractSorter {
     /**
      * Abstract method, should be overrided by subtypes.
      *
-     * @param array array to sort
+     * @param array array to sort.
      */
     public abstract void sort(int [] array);
 }

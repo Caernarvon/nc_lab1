@@ -13,7 +13,7 @@ public abstract class AbstractMergedSorter extends AbstractSorter implements Mer
     /**
      * Overrided sort method to use merged sort.
      *
-     * @param array array to work with
+     * @param array array to work with.
      */
     @Override
     public void sort(int[] array) {
@@ -25,7 +25,7 @@ public abstract class AbstractMergedSorter extends AbstractSorter implements Mer
      * size is not less 2. Method calls {@code sortDividedArray} to sort divided
      * arrays.
      *
-     * @param array array to work with
+     * @param array array to work with.
      */
     @Override
     public int[] divideArray(int[] array) {
@@ -46,8 +46,8 @@ public abstract class AbstractMergedSorter extends AbstractSorter implements Mer
      * <p>When sorting is done {@code mergeArrays} is called to merge two
      * sorted arrays.
      *
-     * @param array1 first half of divided array
-     * @param array2 second half of divided array
+     * @param array1 first half of divided array.
+     * @param array2 second half of divided array.
      */
     public abstract int[] sortDividedArray(int[] array1, int[] array2);
 
@@ -55,8 +55,8 @@ public abstract class AbstractMergedSorter extends AbstractSorter implements Mer
     /**
      * Method does merge two sorted halfs of one divided array.
      *
-     * @param array1 first sorted half of divided array
-     * @param array2 second sorted half of divided array
+     * @param array1 first sorted half of divided array.
+     * @param array2 second sorted half of divided array.
      */
     @Override
     public int[] mergeArrays(int[] array1, int[] array2) {
