@@ -17,7 +17,7 @@ public final class MergedBubbleSorterEnd extends AbstractMergedSorter {
      * @param array2 second half of divided array.
      */
     @Override
-    public int[] sortDividedArray(int[] array1, int[] array2) {
+    public int[] sortDividedArrays(int[] array1, int[] array2) {
         BubbleSorterEnd sorter = new BubbleSorterEnd();
         sorter.sort(array1);
         sorter.sort(array2);

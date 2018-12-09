@@ -16,7 +16,7 @@ public final class MergedUtilitySorter extends AbstractMergedSorter {
      * @param array2 second half of divided array.
      */
     @Override
-    public int[] sortDividedArray(int[] array1, int[] array2) {
+    public int[] sortDividedArrays(int[] array1, int[] array2) {
         UtilitySorter sorter = new UtilitySorter();
         sorter.sort(array1);
         sorter.sort(array2);
