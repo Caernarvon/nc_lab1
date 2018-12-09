@@ -59,7 +59,7 @@ public class Filler {
     /**
      * Generates and returns a randomly filled array.
      */
-    @FillMethod(name = "RandomlyFillerArray")
+    @FillMethod(name = "RandomlyFilledArray")
     public static int[] generateRandomlyFilledArray(final int ARRAY_LENGTH) {
         int[] array = new int[ARRAY_LENGTH];
         for (int i = 0; i < ARRAY_LENGTH; i++) {
