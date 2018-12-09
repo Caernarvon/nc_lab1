@@ -309,16 +309,4 @@ public class Analyzer {
         }
         return end - start;
     }
-
-    /**
-     * Method allows to fill array using set of marked methods with {@code FillMethod}.
-     * <p> In reference to Reflections API{@see reflections.Reflections} if method is
-     * static than first arg should be null.
-     *
-     * @param methodName method name which will be used to fill.
-     */
-    private int[] fillThroughReflection(String methodName, final int ARRAY_SIZE) {
-        ReflectionUtils reflectionUtils = new ReflectionUtils();
-        return reflectionUtils.fillThroughReflection(methodName, ARRAY_SIZE);
-    }
 }
