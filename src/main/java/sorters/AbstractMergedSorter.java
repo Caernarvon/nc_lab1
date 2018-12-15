@@ -10,7 +10,7 @@ import java.util.concurrent.*;
  */
 
 public abstract class AbstractMergedSorter extends AbstractSorter implements MergedSorter {
-    int[] arr;
+    private int[] arr;
     private static int freeCoresAmount = Runtime.getRuntime().availableProcessors();
 
     /**
@@ -29,53 +29,28 @@ public abstract class AbstractMergedSorter extends AbstractSorter implements Mer
             final int quarter = middle / 2;
             ExecutorService executor = Executors.newSingleThreadExecutor();
             if ((freeCoresAmount / 2) >= 4) {
-                /**
-                * dividing and sorting arrays in 4 threads
-                */
-                final Future<int[]> sortResult1 = executor.submit(new Callable<int[]>() {
-                    @Override
-                    public int[] call() {
-                        int[] array1 = Arrays.copyOfRange(array, 0, quarter);
-                        return divideArray(array1);
-                    }
-                });
-                final Future<int[]> sortResult2 = executor.submit(new Callable<int[]>() {
-                    @Override
-                    public int[] call() {
-                        int[] array2 = Arrays.copyOfRange(array, quarter, middle);
-                        return divideArray(array2);
-                    }
-                });
-                final Future<int[]> sortResult3 = executor.submit(new Callable<int[]>() {
-                    @Override
-                    public int[] call() {
-                        int[] array3 = Arrays.copyOfRange(array, middle, middle + quarter);
-                        return divideArray(array3);
-                    }
-                });
-                final Future<int[]> sortResult4 = executor.submit(new Callable<int[]>() {
-                    @Override
-                    public int[] call() {
-                        int[] array4 = Arrays.copyOfRange(array, middle + quarter, array.length);
-                        return divideArray(array4);
-                    }
-                });
-
-                /**
-                 * merging arrays in 2 threads
-                 */
-
                 try {
+                    /**
+                     * dividing and sorting arrays in 4 threads
+                     */
+                    final int[] array1 = parallelSort(array, executor, 0, quarter);
+                    final int[] array2 = parallelSort(array, executor, quarter, middle);
+                    final int[] array3 = parallelSort(array, executor, middle, middle + quarter);
+                    final int[] array4 = parallelSort(array, executor, middle + quarter, array.length);
+
+                    /**
+                     * merging arrays in 2 threads
+                     */
                     Future<int[]> merge1 = executor.submit(new Callable<int[]>() {
                         @Override
-                        public int[] call() throws ExecutionException, InterruptedException {
-                            return mergeArrays(sortResult1.get(), sortResult2.get());
+                        public int[] call() {
+                            return mergeArrays(array1, array2);
                         }
                     });
                     Future<int[]> merge2 = executor.submit(new Callable<int[]>() {
                         @Override
-                        public int[] call() throws ExecutionException, InterruptedException {
-                            return mergeArrays(sortResult3.get(), sortResult4.get());
+                        public int[] call() {
+                            return mergeArrays(array3, array4);
                         }
                     });
                     setArr(mergeArrays(merge1.get(), merge2.get()));
@@ -87,28 +62,16 @@ public abstract class AbstractMergedSorter extends AbstractSorter implements Mer
                     executor.shutdown();
                 }
             } else {
-                /**
-                 * dividing and sorting arrays in 2 threads
-                 */
-                final Future<int[]> sortResult1 = executor.submit(new Callable<int[]>() {
-                    @Override
-                    public int[] call() {
-                        int[] array1 = Arrays.copyOfRange(array, 0, middle);
-                        return divideArray(array1);
-                    }
-                });
-                final Future<int[]> sortResult2 = executor.submit(new Callable<int[]>() {
-                    @Override
-                    public int[] call() {
-                        int[] array2 = Arrays.copyOfRange(array, middle, array.length);
-                        return divideArray(array2);
-                    }
-                });
                 try {
+                    /**
+                     * dividing and sorting arrays in 2 threads
+                     */
+                    final int[] array1 = parallelSort(array, executor, 0, middle);
+                    final int[] array2 = parallelSort(array, executor, middle, array.length);
                     /**
                      * merging arrays
                      */
-                    setArr(mergeArrays(sortResult1.get(), sortResult2.get()));
+                    setArr(mergeArrays(array1, array2));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -179,6 +142,17 @@ public abstract class AbstractMergedSorter extends AbstractSorter implements Mer
             }
         }
         return array;
+    }
+
+    private int[] parallelSort(final int[] array, ExecutorService executor, final int startPos, final int endPos) throws ExecutionException, InterruptedException {
+        final Future<int[]> sortResult = executor.submit(new Callable<int[]>() {
+            @Override
+            public int[] call() {
+                int[] quarterOfArray = Arrays.copyOfRange(array, startPos, endPos);
+                return divideArray(quarterOfArray);
+            }
+        });
+        return sortResult.get();
     }
 
     public void setArr(int[] arr) {
